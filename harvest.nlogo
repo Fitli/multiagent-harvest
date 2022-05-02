@@ -4,10 +4,16 @@ patches-own [
   is-wall
 ]
 
+turtles-own [
+  gain
+  freeze-time
+]
+
 to setup
   clear-all
   ;; make some trees
   ask patches [init-trees]
+  init-turtles
   reset-ticks
   render
 end
@@ -24,12 +30,22 @@ to init-trees
   ]
 end
 
+to init-turtles
+  create-turtles num-turtles
+  [
+    set shape "person"
+    spawn
+  ]
+end
+
 to go
   if mouse-down? [
     ask patch (round mouse-xcor) (round mouse-ycor) [
       set has-fruit false
     ]
   ]
+  ask turtles [act]
+  ask turtles [unfreeze]
   regrow
   render
   tick
@@ -58,6 +74,38 @@ to regrow
     ]
   ]
 end
+
+to eat
+  set has-fruit false
+  set gain gain + 1
+end
+
+to act
+  let dir random 4
+  if dir = 0 [left 90]
+  if dir = 1 [right 90]
+  forward 1
+  if has-fruit [eat]
+  let rand random 30
+  if rand = 0 [shot]
+end
+
+to shot
+  hide-turtle
+  set freeze-time 25
+end
+
+to unfreeze
+  set freeze-time freeze-time - 1
+  if freeze-time = 0 [spawn]
+end
+
+to spawn
+  set heading 90 * random 4
+  setxy random 10 random 10
+  show-turtle
+  set freeze-time -1
+end
 @#$#@#$#@
 GRAPHICS-WINDOW
 210
@@ -73,24 +121,24 @@ GRAPHICS-WINDOW
 1
 1
 0
-1
-1
-1
--16
-16
--16
-16
 0
 0
+1
+0
+32
+0
+32
+1
+1
 1
 ticks
 30.0
 
 SLIDER
-24
-52
-196
-85
+15
+84
+187
+117
 density
 density
 0
@@ -102,10 +150,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-23
-97
-195
-130
+14
+127
+186
+160
 regrow-rate
 regrow-rate
 0
@@ -117,10 +165,10 @@ NIL
 HORIZONTAL
 
 BUTTON
-29
-144
-96
-177
+26
+214
+93
+247
 NIL
 setup
 NIL
@@ -134,10 +182,10 @@ NIL
 1
 
 BUTTON
-118
-155
-181
-188
+97
+214
+160
+247
 NIL
 go
 T
@@ -149,6 +197,21 @@ NIL
 NIL
 NIL
 1
+
+SLIDER
+14
+169
+186
+202
+num-turtles
+num-turtles
+0
+30
+15.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

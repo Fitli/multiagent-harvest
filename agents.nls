@@ -1,0 +1,88 @@
+breed [coop-randoms coop-random]       ;; random
+breed [coop-nears coop-near]           ;; near + _
+breed [coop-visions coop-vision]       ;; vision + _
+breed [coop-protectors coop-protector] ;; vision + radius
+
+
+breed [defe-randoms defe-random] 
+breed [defe-nears defe-near]
+breed [defe-visions defe-vision]
+breed [defe-radiuss defe-radius]
+
+
+
+;; expolration
+;;     random
+;;     vision
+;; eating
+;;     greedy
+;;     timeout
+;; shooting
+;;     vision
+;;     radius
+;;     enemy
+
+
+to act
+  if not has-fruit [search-food]
+  try-eat
+  shoot
+  
+  if random 30 = 0 [shot]
+end
+
+to search-food
+  if not search-vision
+  [ search-random]
+end
+
+
+to search-random
+  let new-heading random 3
+  if new-heading = 0 []
+  if new-heading = 1 [right 90]
+  if new-heading = 2 [left 90]
+  
+  forward 1
+end
+
+to-report search-vision
+  let dis-something false
+  let cur-dist 1
+  repeat eat-vision [
+    if try-look cur-dist 0   [report true]
+    if try-look cur-dist 90  [report true]
+    if try-look cur-dist 180 [report true]
+    if try-look cur-dist 270 [report true]
+    set cur-dist cur-dist + 1
+  ]
+  report false
+end
+
+to-report try-look [dist h]
+  let target patch-at-heading-and-distance h dist
+  if target = nobody [report false]
+  let has-food [has-fruit] of target
+  if has-food [
+    set heading h
+    forward 1
+    report true
+  ]
+  report false
+end
+
+
+to try-eat
+  ifelse full-time > 0
+  [ set full-time full-time - 1 ]
+  [
+    if eat-fruit [ set full-time eat-timeout]
+  ]
+  
+end
+
+to shoot
+  
+end
+
+

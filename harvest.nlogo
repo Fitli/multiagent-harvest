@@ -7,7 +7,17 @@ patches-own [
 turtles-own [
   gain
   freeze-time
+
+  eat-vision
+
+  eat-timeout
+  full-time
+
+  shoot-vision
+  shoot-range
 ]
+
+__includes ["agents.nls"]
 
 to setup
   clear-all
@@ -34,6 +44,8 @@ to init-turtles
   create-turtles num-turtles
   [
     set shape "person"
+    set eat-vision 5
+    set eat-timeout 10
     spawn
   ]
 end
@@ -44,7 +56,7 @@ to go
       set has-fruit false
     ]
   ]
-  ask turtles [act]
+  ask turtles with [freeze-time <= 0] [act]
   ask turtles [unfreeze]
   regrow
   render
@@ -75,19 +87,13 @@ to regrow
   ]
 end
 
-to eat
-  set has-fruit false
-  set gain gain + 1
-end
-
-to act
-  let dir random 4
-  if dir = 0 [left 90]
-  if dir = 1 [right 90]
-  forward 1
-  if has-fruit [eat]
-  let rand random 30
-  if rand = 0 [shot]
+to-report eat-fruit
+  if has-fruit [
+    set has-fruit false
+    set gain gain + 1
+    report true
+  ]
+  report false
 end
 
 to shot
@@ -96,7 +102,8 @@ to shot
 end
 
 to unfreeze
-  set freeze-time freeze-time - 1
+  if freeze-time >= 0
+  [ set freeze-time freeze-time - 1 ]
   if freeze-time = 0 [spawn]
 end
 
@@ -110,11 +117,11 @@ end
 GRAPHICS-WINDOW
 210
 10
-674
-475
+878
+679
 -1
 -1
-13.82
+20.0
 1
 10
 1

@@ -6,7 +6,6 @@ patches-own [
 
 to setup
   clear-all
-  set-default-shape turtles "circle"
   ;; make some trees
   ask patches [init-trees]
   reset-ticks
@@ -28,7 +27,7 @@ end
 to go
   if mouse-down? [
     ask patch (round mouse-xcor) (round mouse-ycor) [
-      set pcolor 52
+      set has-fruit false
     ]
   ]
   regrow
@@ -51,7 +50,9 @@ end
 to regrow
   ask patches with [is-tree and not has-fruit]
   [
-    if (random-float 100) < regrow-rate
+    let fertility count neighbors with [has-fruit]
+
+    if (random-float 1) < 1 - ((1 - regrow-rate / 100) ^ fertility)
     [
       set has-fruit true
     ]

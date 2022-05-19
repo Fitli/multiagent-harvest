@@ -4,7 +4,7 @@ breed [coop-visions coop-vision]       ;; vision + _
 breed [coop-protectors coop-protector] ;; vision + radius
 
 
-breed [defe-randoms defe-random] 
+breed [defe-randoms defe-random]
 breed [defe-nears defe-near]
 breed [defe-visions defe-vision]
 breed [defe-radiuss defe-radius]
@@ -27,8 +27,8 @@ to act
   if not has-fruit [search-food]
   try-eat
   shoot
-  
-  if random 30 = 0 [shot]
+
+  ;;if random 30 = 0 [shot]
 end
 
 to search-food
@@ -42,7 +42,7 @@ to search-random
   if new-heading = 0 []
   if new-heading = 1 [right 90]
   if new-heading = 2 [left 90]
-  
+
   forward 1
 end
 
@@ -73,16 +73,15 @@ end
 
 
 to try-eat
-  ifelse full-time > 0
-  [ set full-time full-time - 1 ]
-  [
-    if eat-fruit [ set full-time eat-timeout]
+  ifelse full-time > 0 [
+    set full-time full-time - 1
+  ][
+    if eat-fruit [ set full-time eating-cooldown]
   ]
-  
 end
 
 to shoot
-  
+
 end
 
 

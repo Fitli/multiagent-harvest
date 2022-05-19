@@ -29,21 +29,19 @@ to setup
 end
 
 to init-trees
-  ifelse (random-float 100) < density
-  [
+  ifelse (random-float 100) < density [
     set is-tree true
     set has-fruit true
-  ]
-  [
+  ][
     set is-tree false
     set has-fruit false
   ]
 end
 
 to init-turtles
-  create-turtles num-turtles
-  [
+  create-turtles num-turtles [
     set shape "person"
+    set color red
     set eat-vision 5
     set eat-timeout 10
     spawn
@@ -52,9 +50,8 @@ end
 
 to go
   if mouse-down? [
-    ask patch (round mouse-xcor) (round mouse-ycor) [
-      set has-fruit false
-    ]
+    ask patch (round mouse-xcor) (round mouse-ycor)
+    [ set has-fruit false ]
   ]
   ask turtles with [freeze-time <= 0] [act]
   ask turtles [unfreeze]
@@ -64,10 +61,8 @@ to go
 end
 
 to render
-  ask patches
-  [
-    if is-tree
-    [
+  ask patches [
+    if is-tree [
       ifelse has-fruit
       [set pcolor green]
       [set pcolor 52]
@@ -76,14 +71,10 @@ to render
 end
 
 to regrow
-  ask patches with [is-tree and not has-fruit]
-  [
+  ask patches with [is-tree and not has-fruit] [
     let fertility count neighbors with [has-fruit]
-
-    if (random-float 1) < 1 - ((1 - regrow-rate / 100) ^ fertility)
-    [
-      set has-fruit true
-    ]
+    if (random-float 1) < 1 - ((1 - regrow-rate / 1000) ^ fertility)
+    [ set has-fruit true ]
   ]
 end
 
@@ -109,7 +100,7 @@ end
 
 to spawn
   set heading 90 * random 4
-  setxy random 10 random 10
+  setxy (random max-pxcor) (random max-pycor)
   show-turtle
   set freeze-time -1
 end
@@ -117,7 +108,7 @@ end
 GRAPHICS-WINDOW
 210
 10
-878
+1278
 679
 -1
 -1
@@ -132,7 +123,7 @@ GRAPHICS-WINDOW
 0
 1
 0
-32
+52
 0
 32
 1
@@ -153,7 +144,7 @@ density
 28.0
 1
 1
-NIL
+%
 HORIZONTAL
 
 SLIDER
@@ -165,17 +156,17 @@ regrow-rate
 regrow-rate
 0
 100
-1.0
+10.0
 1
 1
-NIL
+‰
 HORIZONTAL
 
 BUTTON
 26
-214
+29
 93
-247
+62
 NIL
 setup
 NIL
@@ -190,9 +181,9 @@ NIL
 
 BUTTON
 97
-214
+29
 160
-247
+62
 NIL
 go
 T
@@ -215,6 +206,21 @@ num-turtles
 0
 30
 15.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+15
+212
+187
+245
+eating-cooldown
+eating-cooldown
+0
+50
+10.0
 1
 1
 NIL

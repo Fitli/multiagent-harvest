@@ -15,6 +15,8 @@ turtles-own [
 
   shoot-vision
   shoot-range
+
+  shoot-treshold
 ]
 
 __includes ["agents.nls"]
@@ -44,6 +46,9 @@ to init-turtles
     set color red
     set eat-vision 5
     set eat-timeout 10
+
+    set shoot-vision 5
+    set shoot-treshold 30
     spawn
   ]
 end
@@ -54,6 +59,7 @@ to go
     [ set has-fruit false ]
   ]
   ask turtles with [freeze-time <= 0] [act]
+  ask links [die]
   ask turtles [unfreeze]
   regrow
   render

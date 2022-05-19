@@ -24,9 +24,9 @@ breed [defe-radiuss defe-radius]
 
 
 to act
-  if not has-fruit [search-food]
-  try-eat
-  shoot
+  if not try-shoot [
+    if-else not has-fruit [search-food] [try-eat]
+  ]
 
   ;;if random 30 = 0 [shot]
 end
@@ -80,8 +80,53 @@ to try-eat
   ]
 end
 
-to shoot
+to-report count-fruit
+  let x xcor
+  let y ycor
+  let vision eat-vision
+  report count patches with [(pxcor > x - vision) and (pycor > y - vision) and (pxcor < x + vision) and (pycor < y + vision) and has-fruit]
+end
 
+to-report try-shoot
+  let target search-vision-turtles
+  if target = nobody [report false]
+  if-else count-fruit < shoot-treshold 
+  [
+    create-links-with turtles-on target
+    ask turtles-on target [shot]
+    report true
+  ]
+  [report false]
+  
+  
+end
+
+to-report search-vision-turtles
+  let dis-something nobody
+  let cur-dist 1
+  repeat shoot-vision [
+    let target try-look-turtles cur-dist 0
+    if target != nobody   [report target]
+    set target try-look-turtles cur-dist 90
+    if target != nobody   [report target]
+    set target try-look-turtles cur-dist 180
+    if target != nobody   [report target]
+    set target try-look-turtles cur-dist 270
+    if target != nobody   [report target]
+    
+    set cur-dist cur-dist + 1
+  ]
+  report nobody
+end
+
+to-report try-look-turtles [dist h]
+  let target patch-at-heading-and-distance h dist
+  if target = nobody [report nobody]
+  let has-turtles any? turtles-on target
+  if has-turtles [
+    report target
+  ]
+  report nobody
 end
 
 

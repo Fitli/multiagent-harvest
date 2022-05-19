@@ -45,21 +45,22 @@ to init-turtles
     set shape "person"
     set color red
     set eat-vision 5
-    set eat-timeout 10
+    set eat-timeout 5
 
-    set shoot-vision 5
-    set shoot-treshold 30
+    set shoot-vision 8
+    set shoot-treshold 10
     spawn
   ]
 end
 
 to go
+  ask links [die]
   if mouse-down? [
     ask patch (round mouse-xcor) (round mouse-ycor)
     [ set has-fruit false ]
   ]
   ask turtles with [freeze-time <= 0] [act]
-  ask links [die]
+
   ask turtles [unfreeze]
   regrow
   render
@@ -106,7 +107,7 @@ end
 
 to spawn
   set heading 90 * random 4
-  setxy (random max-pxcor) (random max-pycor)
+  setxy (random 20) (random 20)
   show-turtle
   set freeze-time -1
 end
@@ -211,7 +212,7 @@ num-turtles
 num-turtles
 0
 30
-15.0
+10.0
 1
 1
 NIL

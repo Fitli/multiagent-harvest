@@ -122,7 +122,7 @@ end
 to-report try-look-turtles [dist h]
   let target patch-at-heading-and-distance h dist
   if target = nobody [report nobody]
-  let has-turtles any? turtles-on target
+  let has-turtles any? (turtles-on target) with [not hidden?]
   if has-turtles [
     report target
   ]

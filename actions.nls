@@ -1,0 +1,27 @@
+to-report eat-fruit
+  if has-fruit [
+    set has-fruit false
+    set gain gain + 1
+    set sum-time-gains sum-time-gains + ticks
+    report true
+  ]
+  report false
+end
+
+to shot
+  hide-turtle
+  set freeze-time 25
+end
+
+to unfreeze
+  if freeze-time >= 0
+  [ set freeze-time freeze-time - 1 ]
+  if freeze-time = 0 [spawn]
+end
+
+to spawn
+  set heading 90 * random 4
+  setxy (random 20) (random 20)
+  show-turtle
+  set freeze-time -1
+end

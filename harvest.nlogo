@@ -31,7 +31,7 @@ turtles-own [
   shoot-treshold
 ]
 
-__includes ["agents.nls"]
+__includes ["agents.nls" "metrics.nls" "actions.nls"]
 
 to setup
   clear-all
@@ -117,46 +117,6 @@ to regrow
     if (random-float 1) < 1 - ((1 - regrow-rate / 1000) ^ fertility)
     [ set has-fruit true ]
   ]
-end
-
-to calculate-metrics
-  set overall-avg-gain (sum [gain] of turtles) / (count turtles * ticks)
-  set s1-avg-gain (sum [gain] of turtles with [strategy = 1]) / (count turtles with [strategy = 1] * ticks)
-  set s2-avg-gain (sum [gain] of turtles with [strategy = 2]) / (count turtles with [strategy = 2] * ticks)
-  set equality (1 - sum [self-equality] of turtles / (2 * num-turtles * sum [gain] of turtles))
-end
-
-to-report self-equality
-  let my-gain gain
-  report sum [abs (gain - my-gain)] of turtles
-end
-
-to-report eat-fruit
-  if has-fruit [
-    set has-fruit false
-    set gain gain + 1
-    set sum-time-gains sum-time-gains + ticks
-    report true
-  ]
-  report false
-end
-
-to shot
-  hide-turtle
-  set freeze-time 25
-end
-
-to unfreeze
-  if freeze-time >= 0
-  [ set freeze-time freeze-time - 1 ]
-  if freeze-time = 0 [spawn]
-end
-
-to spawn
-  set heading 90 * random 4
-  setxy (random 20) (random 20)
-  show-turtle
-  set freeze-time -1
 end
 @#$#@#$#@
 GRAPHICS-WINDOW

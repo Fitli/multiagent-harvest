@@ -160,9 +160,9 @@ to spawn
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-210
+378
 10
-1278
+1446
 679
 -1
 -1
@@ -266,10 +266,10 @@ NIL
 HORIZONTAL
 
 PLOT
-1289
-10
-1489
-160
+1462
+12
+1662
+162
 gains
 NIL
 NIL
@@ -301,10 +301,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1380
-506
-1552
-539
+13
+274
+185
+307
 eat-vision-global
 eat-vision-global
 0
@@ -316,10 +316,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1379
-537
-1553
-570
+12
+305
+186
+338
 shoot-vision-global
 shoot-vision-global
 0
@@ -331,10 +331,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1285
-579
-1457
-612
+12
+353
+184
+386
 eat-timeout-s1
 eat-timeout-s1
 0
@@ -346,10 +346,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1285
-612
-1457
-645
+12
+386
+184
+419
 eat-treshold-s1
 eat-treshold-s1
 0
@@ -361,10 +361,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1285
-644
-1457
-677
+12
+418
+184
+451
 shoot-treshold-s1
 shoot-treshold-s1
 0
@@ -376,10 +376,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1468
-580
-1640
-613
+188
+355
+360
+388
 eat-timeout-s2
 eat-timeout-s2
 0
@@ -391,25 +391,25 @@ NIL
 HORIZONTAL
 
 SLIDER
-1468
-612
-1640
-645
+188
+387
+360
+420
 eat-treshold-s2
 eat-treshold-s2
 0
 8
-1.0
+3.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-1468
-644
-1640
-677
+188
+419
+360
+452
 shoot-treshold-s2
 shoot-treshold-s2
 0
@@ -421,10 +421,10 @@ NIL
 HORIZONTAL
 
 PLOT
-1289
-167
-1489
+1462
 317
+1662
+467
 peace
 NIL
 NIL
@@ -439,10 +439,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "if (ticks > 0) [plot sum-tics-alive / (ticks * num-turtles)]"
 
 PLOT
-1497
-167
-1697
-317
+1461
+472
+1661
+622
 turtles alive
 NIL
 NIL
@@ -459,10 +459,10 @@ PENS
 "pen-2" 1.0 0 -2674135 true "" "plot count turtles with [strategy = 2 and not hidden?]"
 
 PLOT
-1497
-10
-1697
-160
+1462
+163
+1662
+313
 equality
 NIL
 NIL

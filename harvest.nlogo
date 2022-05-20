@@ -123,7 +123,7 @@ to calculate-metrics
   set overall-avg-gain (sum [gain] of turtles) / (count turtles * ticks)
   set s1-avg-gain (sum [gain] of turtles with [strategy = 1]) / (count turtles with [strategy = 1] * ticks)
   set s2-avg-gain (sum [gain] of turtles with [strategy = 2]) / (count turtles with [strategy = 2] * ticks)
-  set equality (sum [self-equality] of turtles / (2 * num-turtles * sum [gain] of turtles))
+  set equality (1 - sum [self-equality] of turtles / (2 * num-turtles * sum [gain] of turtles))
 end
 
 to-report self-equality

@@ -72,13 +72,20 @@ end
 to-report try-look [dist h]
   let target patch-at-heading-and-distance h dist
   if target = nobody [report false]
-  let has-food [has-fruit] of target
+  let treshold eat-treshold
+  let has-food [want-eat treshold] of target
   if has-food [
     set heading h
     forward 1
     report true
   ]
   report false
+end
+
+to-report want-eat [treshold]
+  if (not has-fruit) [report false]
+  let nbs-with-fruit count neighbors with [has-fruit]
+  report nbs-with-fruit > treshold
 end
 
 

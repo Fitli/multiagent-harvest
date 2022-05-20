@@ -1,3 +1,12 @@
+globals [
+  overall-avg-gain
+  s1-avg-gain
+  s2-avg-gain
+  equality
+  sum-time-gains
+  sum-tics-alive
+]
+
 patches-own [
   is-tree
   has-fruit
@@ -5,10 +14,13 @@ patches-own [
 ]
 
 turtles-own [
+  strategy
+
   gain
   freeze-time
 
   eat-vision
+  eat-treshold
 
   eat-timeout
   full-time
@@ -26,8 +38,10 @@ to setup
   ;; make some trees
   ask patches [init-trees]
   init-turtles
-  reset-ticks
+  set sum-time-gains 0
+  set sum-tics-alive 0
   render
+  reset-ticks
 end
 
 to init-trees
@@ -41,14 +55,31 @@ to init-trees
 end
 
 to init-turtles
-  create-turtles num-turtles [
+  create-turtles num-turtles-s1 [
+    set shape "person"
+    set color yellow
+    set strategy 1
+
+    set eat-vision eat-vision-global
+    set eat-timeout eat-timeout-s1
+    set eat-treshold eat-treshold-s1
+
+    set shoot-vision shoot-vision-global
+    set shoot-treshold shoot-treshold-s1
+    spawn
+  ]
+
+  create-turtles num-turtles - num-turtles-s1 [
     set shape "person"
     set color red
-    set eat-vision 5
-    set eat-timeout 5
+    set strategy 2
 
-    set shoot-vision 8
-    set shoot-treshold 10
+    set eat-vision eat-vision-global
+    set eat-timeout eat-timeout-s2
+    set eat-treshold eat-treshold-s2
+
+    set shoot-vision shoot-vision-global
+    set shoot-treshold shoot-treshold-s2
     spawn
   ]
 end
@@ -59,11 +90,14 @@ to go
     ask patch (round mouse-xcor) (round mouse-ycor)
     [ set has-fruit false ]
   ]
+
+  set sum-tics-alive sum-tics-alive + count turtles with [freeze-time <= 0]
   ask turtles with [freeze-time <= 0] [act]
 
   ask turtles [unfreeze]
   regrow
   render
+  if ticks > 0 [calculate-metrics]
   tick
 end
 
@@ -85,10 +119,23 @@ to regrow
   ]
 end
 
+to calculate-metrics
+  set overall-avg-gain (sum [gain] of turtles) / (count turtles * ticks)
+  set s1-avg-gain (sum [gain] of turtles with [strategy = 1]) / (count turtles with [strategy = 1] * ticks)
+  set s2-avg-gain (sum [gain] of turtles with [strategy = 2]) / (count turtles with [strategy = 2] * ticks)
+  set equality (sum [self-equality] of turtles / (2 * num-turtles * sum [gain] of turtles))
+end
+
+to-report self-equality
+  let my-gain gain
+  report sum [abs (gain - my-gain)] of turtles
+end
+
 to-report eat-fruit
   if has-fruit [
     set has-fruit false
     set gain gain + 1
+    set sum-time-gains sum-time-gains + ticks
     report true
   ]
   report false
@@ -218,20 +265,216 @@ num-turtles
 NIL
 HORIZONTAL
 
+PLOT
+1289
+10
+1489
+160
+gains
+NIL
+NIL
+0.0
+10.0
+0.0
+0.0
+true
+false
+"" ""
+PENS
+"all" 1.0 0 -16777216 true "" "if ticks > 0 [plot overall-avg-gain]"
+"strategy 1" 1.0 0 -1184463 true "" "if ticks > 0 [plot s1-avg-gain]"
+"pen-2" 1.0 0 -2674135 true "" "if ticks > 0 [plot s2-avg-gain]"
+
 SLIDER
-15
-212
-187
-245
-eating-cooldown
-eating-cooldown
+13
+209
+185
+242
+num-turtles-s1
+num-turtles-s1
+0
+10
+5.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+1380
+506
+1552
+539
+eat-vision-global
+eat-vision-global
+0
+32
+5.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+1379
+537
+1553
+570
+shoot-vision-global
+shoot-vision-global
+0
+32
+8.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+1285
+579
+1457
+612
+eat-timeout-s1
+eat-timeout-s1
 0
 50
+0.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+1285
+612
+1457
+645
+eat-treshold-s1
+eat-treshold-s1
+0
+8
+0.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+1285
+644
+1457
+677
+shoot-treshold-s1
+shoot-treshold-s1
+0
+36
 10.0
 1
 1
 NIL
 HORIZONTAL
+
+SLIDER
+1468
+580
+1640
+613
+eat-timeout-s2
+eat-timeout-s2
+0
+50
+0.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+1468
+612
+1640
+645
+eat-treshold-s2
+eat-treshold-s2
+0
+8
+1.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+1468
+644
+1640
+677
+shoot-treshold-s2
+shoot-treshold-s2
+0
+36
+10.0
+1
+1
+NIL
+HORIZONTAL
+
+PLOT
+1289
+167
+1489
+317
+peace
+NIL
+NIL
+0.0
+1.0
+0.0
+1.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -16777216 true "" "if (ticks > 0) [plot sum-tics-alive / (ticks * num-turtles)]"
+
+PLOT
+1497
+167
+1697
+317
+turtles alive
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -16777216 true "" "plot count turtles with [not hidden?]"
+"pen-1" 1.0 0 -1184463 true "" "plot count turtles with [strategy = 1 and not hidden?]"
+"pen-2" 1.0 0 -2674135 true "" "plot count turtles with [strategy = 2 and not hidden?]"
+
+PLOT
+1497
+10
+1697
+160
+equality
+NIL
+NIL
+0.0
+0.0
+0.0
+0.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -16777216 true "" "plot equality"
 
 @#$#@#$#@
 ## WHAT IS IT?

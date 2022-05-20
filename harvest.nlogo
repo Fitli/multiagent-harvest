@@ -274,9 +274,9 @@ gains
 NIL
 NIL
 0.0
-10.0
+1000.0
 0.0
-0.0
+1.0
 true
 false
 "" ""
@@ -399,7 +399,7 @@ eat-treshold-s2
 eat-treshold-s2
 0
 8
-3.0
+1.0
 1
 1
 NIL
@@ -429,7 +429,7 @@ peace
 NIL
 NIL
 0.0
-1.0
+1000.0
 0.0
 1.0
 true
@@ -447,7 +447,7 @@ turtles alive
 NIL
 NIL
 0.0
-10.0
+1000.0
 0.0
 10.0
 true
@@ -467,9 +467,9 @@ equality
 NIL
 NIL
 0.0
+1000.0
 0.0
-0.0
-0.0
+1.0
 true
 false
 "" ""

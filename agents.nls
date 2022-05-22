@@ -75,16 +75,10 @@ end
 
 
 to-report try-eat
-  ifelse eat-blocked-time > 0 [
-    set eat-blocked-time eat-blocked-time - 1
-    report false
-  ][
-    if eat-fruit [ 
-      set eat-blocked-time eat-timeout
-      report true
-    ]
-    report false
+  if eat-fruit [ 
+    report true
   ]
+  report false
 end
 
 to-report count-fruit

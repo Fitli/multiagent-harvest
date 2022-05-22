@@ -23,7 +23,6 @@ turtles-own [
 
   eat-vision
   eat-treshold
-  eat-timeout
 
   shoot-vision
   shoot-treshold
@@ -75,7 +74,6 @@ end
 to update-turtle-constants
   ask turtles with [strategy = 1] [
     set eat-vision eat-vision-s1
-    set eat-timeout eat-timeout-s1
     set eat-treshold eat-treshold-s1
 
     set shoot-vision shoot-vision-s1
@@ -86,7 +84,6 @@ to update-turtle-constants
 
   ask turtles with [strategy = 2] [
     set eat-vision eat-vision-s2
-    set eat-timeout eat-timeout-s2
     set eat-treshold eat-treshold-s2
 
     set shoot-vision shoot-vision-s2
@@ -280,21 +277,6 @@ SLIDER
 416
 184
 449
-eat-timeout-s1
-eat-timeout-s1
-0
-50
-0.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-12
-448
-184
-481
 eat-treshold-s1
 eat-treshold-s1
 0
@@ -307,9 +289,9 @@ HORIZONTAL
 
 SLIDER
 12
-511
+479
 184
-544
+512
 shoot-treshold-s1
 shoot-treshold-s1
 0
@@ -325,21 +307,6 @@ SLIDER
 416
 360
 449
-eat-timeout-s2
-eat-timeout-s2
-0
-50
-0.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-188
-448
-360
-481
 eat-treshold-s2
 eat-treshold-s2
 0
@@ -352,9 +319,9 @@ HORIZONTAL
 
 SLIDER
 188
-512
+480
 360
-545
+513
 shoot-treshold-s2
 shoot-treshold-s2
 0
@@ -453,9 +420,9 @@ HORIZONTAL
 
 SLIDER
 12
-480
+448
 184
-513
+481
 shoot-vision-s1
 shoot-vision-s1
 0
@@ -468,9 +435,9 @@ HORIZONTAL
 
 SLIDER
 188
-480
+448
 360
-513
+481
 shoot-vision-s2
 shoot-vision-s2
 0
@@ -483,11 +450,41 @@ HORIZONTAL
 
 SLIDER
 12
+511
+184
+544
+shoot-accuracy-s1
+shoot-accuracy-s1
+0
+100
+50.0
+1
+1
+%
+HORIZONTAL
+
+SLIDER
+188
+512
+360
+545
+shoot-accuracy-s2
+shoot-accuracy-s2
+0
+100
+50.0
+1
+1
+%
+HORIZONTAL
+
+SLIDER
+12
 543
 184
 576
-shoot-accuracy-s1
-shoot-accuracy-s1
+shoot-chance-s1
+shoot-chance-s1
 0
 100
 50.0
@@ -501,36 +498,6 @@ SLIDER
 544
 360
 577
-shoot-accuracy-s2
-shoot-accuracy-s2
-0
-100
-50.0
-1
-1
-%
-HORIZONTAL
-
-SLIDER
-12
-575
-184
-608
-shoot-chance-s1
-shoot-chance-s1
-0
-100
-50.0
-1
-1
-%
-HORIZONTAL
-
-SLIDER
-188
-576
-360
-609
 shoot-chance-s2
 shoot-chance-s2
 0

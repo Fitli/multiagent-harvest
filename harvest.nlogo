@@ -57,14 +57,14 @@ end
 
 to init-turtles
   create-turtles num-turtles-s1 [
-    set shape "person"
+    set shape "robot"
     set color yellow
     set strategy 1
     spawn
   ]
 
   create-turtles num-turtles-s2 [
-    set shape "person"
+    set shape "robot"
     set color red
     set strategy 2
     spawn
@@ -234,7 +234,7 @@ num-turtles-s1
 num-turtles-s1
 0
 10
-0.0
+5.0
 1
 1
 NIL
@@ -269,7 +269,7 @@ num-turtles-s2
 num-turtles-s2
 0
 10
-12.0
+5.0
 1
 1
 NIL
@@ -299,7 +299,7 @@ eat-treshold-s1
 eat-treshold-s1
 0
 8
-1.0
+0.0
 1
 1
 NIL
@@ -314,7 +314,7 @@ shoot-treshold-s1
 shoot-treshold-s1
 0
 36
-0.0
+40.0
 1
 1
 NIL
@@ -344,7 +344,7 @@ eat-treshold-s2
 eat-treshold-s2
 0
 8
-1.0
+2.0
 1
 1
 NIL
@@ -359,7 +359,7 @@ shoot-treshold-s2
 shoot-treshold-s2
 0
 36
-0.0
+40.0
 1
 1
 NIL
@@ -579,7 +579,7 @@ SWITCH
 719
 render?
 render?
-1
+0
 1
 -1000
 
@@ -830,6 +830,23 @@ Polygon -7500403 true true 135 105 90 60 45 45 75 105 135 135
 Polygon -7500403 true true 165 105 165 135 225 105 255 45 210 60
 Polygon -7500403 true true 135 90 120 45 150 15 180 45 165 90
 
+robot
+false
+0
+Rectangle -7500403 true true 105 30 195 90
+Rectangle -7500403 true true 135 90 165 105
+Rectangle -7500403 true true 105 105 195 180
+Rectangle -7500403 true true 105 180 135 255
+Rectangle -7500403 true true 165 180 195 255
+Rectangle -7500403 true true 90 105 105 120
+Rectangle -7500403 true true 75 105 90 195
+Rectangle -7500403 true true 210 105 225 195
+Rectangle -7500403 true true 195 105 210 120
+Rectangle -1 true false 120 45 135 60
+Rectangle -1 true false 165 45 180 60
+Rectangle -7500403 true true 90 255 135 270
+Rectangle -7500403 true true 165 255 210 270
+
 sheep
 false
 15
@@ -958,6 +975,7 @@ setup</setup>
     <metric>s2-avg-gain</metric>
     <metric>equality</metric>
     <metric>sum-tics-alive / (ticks * num-turtles)</metric>
+    <metric>sum-time-gains / (sum [gain] of turtles + 0.001)</metric>
     <enumeratedValueSet variable="render?">
       <value value="false"/>
     </enumeratedValueSet>
@@ -1018,6 +1036,84 @@ setup</setup>
     </enumeratedValueSet>
     <steppedValueSet variable="eat-treshold-s1" first="0" step="1" last="4"/>
     <steppedValueSet variable="eat-treshold-s2" first="0" step="1" last="4"/>
+    <enumeratedValueSet variable="eat-timeout-s1">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="eat-timeout-s2">
+      <value value="0"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="smaller-space" repetitions="10" sequentialRunOrder="false" runMetricsEveryStep="false">
+    <setup>set num-turtles-s2 12 - num-turtles-s1
+setup</setup>
+    <go>go</go>
+    <timeLimit steps="1000"/>
+    <metric>overall-avg-gain</metric>
+    <metric>s1-avg-gain</metric>
+    <metric>s2-avg-gain</metric>
+    <metric>equality</metric>
+    <metric>sum-tics-alive / (ticks * num-turtles)</metric>
+    <metric>sum-time-gains / (sum [gain] of turtles + 0.001)</metric>
+    <enumeratedValueSet variable="render?">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="always-update-turtle-constants">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="density">
+      <value value="30"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="regrow-rate">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <steppedValueSet variable="num-turtles-s1" first="0" step="1" last="6"/>
+    <enumeratedValueSet variable="num-turtles-s2">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-vision-s1">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-vision-s2">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-accuracy-s1">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-accuracy-s2">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-treshold-s1">
+      <value value="0"/>
+      <value value="8"/>
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-treshold-s2">
+      <value value="0"/>
+      <value value="8"/>
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-chance-s1">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-chance-s2">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="eat-vision-s1">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="eat-vision-s2">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="eat-treshold-s1">
+      <value value="0"/>
+      <value value="1"/>
+      <value value="3"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="eat-treshold-s2">
+      <value value="0"/>
+      <value value="1"/>
+      <value value="3"/>
+    </enumeratedValueSet>
     <enumeratedValueSet variable="eat-timeout-s1">
       <value value="0"/>
     </enumeratedValueSet>

@@ -17,7 +17,7 @@ to act
 end
 
 to eat-or-move
-  if-else has-fruit [
+  if-else want-eat eat-treshold [
     if not try-eat [
       search-food-random
     ]
@@ -70,7 +70,7 @@ end
 to-report want-eat [treshold]
   if (not has-fruit) [report false]
   let nbs-with-fruit count neighbors with [has-fruit]
-  report nbs-with-fruit > treshold
+  report nbs-with-fruit >= treshold
 end
 
 

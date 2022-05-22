@@ -91,7 +91,7 @@ to-report count-fruit
   let x xcor
   let y ycor
   let vision eat-vision
-  report count patches with [(pxcor > x - vision) and (pycor > y - vision) and (pxcor < x + vision) and (pycor < y + vision) and has-fruit]
+  report count patches with [(pxcor >= x - vision) and (pycor >= y - vision) and (pxcor <= x + vision) and (pycor <= y + vision) and has-fruit]
 end
 
 to-report try-shoot

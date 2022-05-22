@@ -1,4 +1,5 @@
 globals [
+  num-turtles
   overall-avg-gain
   s1-avg-gain
   s2-avg-gain
@@ -15,20 +16,19 @@ patches-own [
 
 turtles-own [
   strategy
-
   gain
+
   freeze-time
+  eat-blocked-time
 
   eat-vision
   eat-treshold
-
   eat-timeout
-  full-time
 
   shoot-vision
-  shoot-range
-
   shoot-treshold
+  shoot-accuracy
+  shoot-chance
 ]
 
 __includes ["agents.nls" "metrics.nls" "actions.nls"]
@@ -36,6 +36,7 @@ __includes ["agents.nls" "metrics.nls" "actions.nls"]
 to setup
   clear-all
   ;; make some trees
+  set num-turtles num-turtles-s1 + num-turtles-s2
   ask patches [init-trees]
   init-turtles
   set sum-time-gains 0
@@ -59,29 +60,41 @@ to init-turtles
     set shape "person"
     set color yellow
     set strategy 1
-
-    set eat-vision eat-vision-global
-    set eat-timeout eat-timeout-s1
-    set eat-treshold eat-treshold-s1
-
-    set shoot-vision shoot-vision-global
-    set shoot-treshold shoot-treshold-s1
     spawn
   ]
 
-  create-turtles num-turtles - num-turtles-s1 [
+  create-turtles num-turtles-s2 [
     set shape "person"
     set color red
     set strategy 2
+    spawn
+  ]
+  update-turtle-constants
+end
 
-    set eat-vision eat-vision-global
+to update-turtle-constants
+  ask turtles with [strategy = 1] [
+    set eat-vision eat-vision-s1
+    set eat-timeout eat-timeout-s1
+    set eat-treshold eat-treshold-s1
+
+    set shoot-vision shoot-vision-s1
+    set shoot-treshold shoot-treshold-s1
+    set shoot-accuracy shoot-accuracy-s1
+    set shoot-chance shoot-chance-s1
+  ]
+
+  ask turtles with [strategy = 2] [
+    set eat-vision eat-vision-s2
     set eat-timeout eat-timeout-s2
     set eat-treshold eat-treshold-s2
 
-    set shoot-vision shoot-vision-global
+    set shoot-vision shoot-vision-s2
     set shoot-treshold shoot-treshold-s2
-    spawn
+    set shoot-accuracy shoot-accuracy-s2
+    set shoot-chance shoot-chance-s2
   ]
+
 end
 
 to go
@@ -91,12 +104,14 @@ to go
     [ set has-fruit false ]
   ]
 
+  if always-update-turtle-constants [ update-turtle-constants ]
+
   set sum-tics-alive sum-tics-alive + count turtles with [freeze-time <= 0]
   ask turtles with [freeze-time <= 0] [act]
 
   ask turtles [unfreeze]
   regrow
-  render
+  if render? [render]
   if ticks > 0 [calculate-metrics]
   tick
 end
@@ -147,10 +162,10 @@ ticks
 30.0
 
 SLIDER
-15
-84
-187
-117
+12
+161
+184
+194
 density
 density
 0
@@ -162,10 +177,10 @@ density
 HORIZONTAL
 
 SLIDER
-14
-127
-186
-160
+188
+161
+360
+194
 regrow-rate
 regrow-rate
 0
@@ -211,15 +226,15 @@ NIL
 1
 
 SLIDER
-14
-169
-186
-202
-num-turtles
-num-turtles
+12
+311
+184
+344
+num-turtles-s1
+num-turtles-s1
 0
-30
-10.0
+10
+5.0
 1
 1
 NIL
@@ -246,12 +261,12 @@ PENS
 "pen-2" 1.0 0 -2674135 true "" "if ticks > 0 [plot s2-avg-gain]"
 
 SLIDER
-13
-209
-185
-242
-num-turtles-s1
-num-turtles-s1
+188
+311
+360
+344
+num-turtles-s2
+num-turtles-s2
 0
 10
 5.0
@@ -261,40 +276,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-13
-274
-185
-307
-eat-vision-global
-eat-vision-global
-0
-32
-5.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
 12
-305
-186
-338
-shoot-vision-global
-shoot-vision-global
-0
-32
-8.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-12
-353
+416
 184
-386
+449
 eat-timeout-s1
 eat-timeout-s1
 0
@@ -307,14 +292,14 @@ HORIZONTAL
 
 SLIDER
 12
-386
+448
 184
-419
+481
 eat-treshold-s1
 eat-treshold-s1
 0
 8
-0.0
+1.0
 1
 1
 NIL
@@ -322,9 +307,9 @@ HORIZONTAL
 
 SLIDER
 12
-418
+511
 184
-451
+544
 shoot-treshold-s1
 shoot-treshold-s1
 0
@@ -337,9 +322,9 @@ HORIZONTAL
 
 SLIDER
 188
-355
+416
 360
-388
+449
 eat-timeout-s2
 eat-timeout-s2
 0
@@ -352,9 +337,9 @@ HORIZONTAL
 
 SLIDER
 188
-387
+448
 360
-420
+481
 eat-treshold-s2
 eat-treshold-s2
 0
@@ -367,9 +352,9 @@ HORIZONTAL
 
 SLIDER
 188
-419
+512
 360
-452
+545
 shoot-treshold-s2
 shoot-treshold-s2
 0
@@ -435,6 +420,168 @@ false
 "" ""
 PENS
 "default" 1.0 0 -16777216 true "" "plot equality"
+
+SLIDER
+12
+384
+184
+417
+eat-vision-s1
+eat-vision-s1
+0
+10
+5.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+188
+384
+360
+417
+eat-vision-s2
+eat-vision-s2
+0
+10
+5.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+12
+480
+184
+513
+shoot-vision-s1
+shoot-vision-s1
+0
+10
+5.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+188
+480
+360
+513
+shoot-vision-s2
+shoot-vision-s2
+0
+10
+5.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+12
+543
+184
+576
+shoot-accuracy-s1
+shoot-accuracy-s1
+0
+100
+50.0
+1
+1
+%
+HORIZONTAL
+
+SLIDER
+188
+544
+360
+577
+shoot-accuracy-s2
+shoot-accuracy-s2
+0
+100
+50.0
+1
+1
+%
+HORIZONTAL
+
+SLIDER
+12
+575
+184
+608
+shoot-chance-s1
+shoot-chance-s1
+0
+100
+50.0
+1
+1
+%
+HORIZONTAL
+
+SLIDER
+188
+576
+360
+609
+shoot-chance-s2
+shoot-chance-s2
+0
+100
+50.0
+1
+1
+%
+HORIZONTAL
+
+TEXTBOX
+14
+139
+164
+159
+Environment
+14
+0.0
+1
+
+TEXTBOX
+14
+287
+164
+307
+Strategies
+14
+0.0
+1
+
+SWITCH
+12
+650
+360
+683
+always-update-turtle-constants
+always-update-turtle-constants
+0
+1
+-1000
+
+SWITCH
+12
+686
+118
+719
+render?
+render?
+0
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?

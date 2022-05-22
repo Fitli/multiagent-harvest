@@ -1,16 +1,3 @@
-breed [coop-randoms coop-random]       ;; random
-breed [coop-nears coop-near]           ;; near + _
-breed [coop-visions coop-vision]       ;; vision + _
-breed [coop-protectors coop-protector] ;; vision + radius
-
-
-breed [defe-randoms defe-random]
-breed [defe-nears defe-near]
-breed [defe-visions defe-vision]
-breed [defe-radiuss defe-radius]
-
-
-
 ;; expolration
 ;;     random
 ;;     vision
@@ -27,14 +14,12 @@ to act
   if not try-shoot [
     eat-or-move
   ]
-
-  ;;if random 30 = 0 [shot]
 end
 
 to eat-or-move
   if-else has-fruit [
     if not try-eat [
-      search-random
+      search-food-random
     ]
   ][
     search-food
@@ -42,12 +27,12 @@ to eat-or-move
 end
 
 to search-food
-  if not search-vision
-  [ search-random ]
+  if not search-food-vision
+  [ search-food-random ]
 end
 
 
-to search-random
+to search-food-random
   let new-heading random 3
   if new-heading = 0 []
   if new-heading = 1 [right 90]
@@ -56,20 +41,20 @@ to search-random
   forward 1
 end
 
-to-report search-vision
+to-report search-food-vision
   let dis-something false
   let cur-dist 1
   repeat eat-vision [
-    if try-look cur-dist 0   [report true]
-    if try-look cur-dist 90  [report true]
-    if try-look cur-dist 180 [report true]
-    if try-look cur-dist 270 [report true]
+    if try-look-for-food cur-dist 0   [report true]
+    if try-look-for-food cur-dist 90  [report true]
+    if try-look-for-food cur-dist 180 [report true]
+    if try-look-for-food cur-dist 270 [report true]
     set cur-dist cur-dist + 1
   ]
   report false
 end
 
-to-report try-look [dist h]
+to-report try-look-for-food [dist h]
   let target patch-at-heading-and-distance h dist
   if target = nobody [report false]
   let treshold eat-treshold
@@ -90,12 +75,12 @@ end
 
 
 to-report try-eat
-  ifelse full-time > 0 [
-    set full-time full-time - 1
+  ifelse eat-blocked-time > 0 [
+    set eat-blocked-time eat-blocked-time - 1
     report false
   ][
     if eat-fruit [ 
-      set full-time eat-timeout
+      set eat-blocked-time eat-timeout
       report true
     ]
     report false
@@ -110,47 +95,26 @@ to-report count-fruit
 end
 
 to-report try-shoot
-  let target search-vision-turtles
+  ;; apply chance to shoot
+  if random 100 >= shoot-chance [report false]
   
+  let target search-shoot-target
   if target = nobody [report false]
-  if-else count-fruit < shoot-treshold 
-  [
-    show word "shooting " target
-    create-links-with turtles-on target
-    ask turtles-on target [shot]
+  if-else count-fruit < shoot-treshold [ 
+    create-link-with target
+    ;; test accuracy
+    if random 100 < shoot-accuracy [
+      ask target [shot]
+      ask my-links [set color red]
+    ]
     report true
+  ][
+    report false
   ]
-  [report false]
-  
-  
 end
 
-to-report search-vision-turtles
-  let dis-something nobody
-  let cur-dist 1
-  repeat shoot-vision [
-    let target try-look-turtles cur-dist 0
-    if target != nobody   [report target]
-    set target try-look-turtles cur-dist 90
-    if target != nobody   [report target]
-    set target try-look-turtles cur-dist 180
-    if target != nobody   [report target]
-    set target try-look-turtles cur-dist 270
-    if target != nobody   [report target]
-    
-    set cur-dist cur-dist + 1
-  ]
-  report nobody
+to-report search-shoot-target
+  let possible-targets other turtles with [not hidden? and distance myself <= shoot-vision]
+  let target one-of possible-targets
+  report target
 end
-
-to-report try-look-turtles [dist h]
-  let target patch-at-heading-and-distance h dist
-  if target = nobody [report nobody]
-  let has-turtles any? (turtles-on target) with [not hidden?]
-  if has-turtles [
-    report target
-  ]
-  report nobody
-end
-
-

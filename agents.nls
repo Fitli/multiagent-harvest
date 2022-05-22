@@ -17,7 +17,7 @@ to act
 end
 
 to eat-or-move
-  if-else want-eat eat-treshold [
+  if-else want-eat eat-threshold [
     if not try-eat [
       search-food-random
     ]
@@ -57,7 +57,7 @@ end
 to-report try-look-for-food [dist h]
   let target patch-at-heading-and-distance h dist
   if target = nobody [report false]
-  let treshold eat-treshold
+  let treshold eat-threshold
   let has-food [want-eat treshold] of target
   if has-food [
     set heading h
@@ -94,7 +94,7 @@ to-report try-shoot
   
   let target search-shoot-target
   if target = nobody [report false]
-  if-else count-fruit < shoot-treshold [ 
+  if-else count-fruit < shoot-threshold [ 
     create-link-with target
     ;; test accuracy
     if random 100 < shoot-accuracy [

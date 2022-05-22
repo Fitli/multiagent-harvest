@@ -22,10 +22,10 @@ turtles-own [
   eat-blocked-time
 
   eat-vision
-  eat-treshold
+  eat-threshold
 
   shoot-vision
-  shoot-treshold
+  shoot-threshold
   shoot-accuracy
   shoot-chance
 ]
@@ -74,20 +74,20 @@ end
 to update-turtle-constants
   ask turtles with [strategy = 1] [
     set eat-vision eat-vision-s1
-    set eat-treshold eat-treshold-s1
+    set eat-threshold eat-threshold-s1
 
     set shoot-vision shoot-vision-s1
-    set shoot-treshold shoot-treshold-s1
+    set shoot-threshold shoot-threshold-s1
     set shoot-accuracy shoot-accuracy-s1
     set shoot-chance shoot-chance-s1
   ]
 
   ask turtles with [strategy = 2] [
     set eat-vision eat-vision-s2
-    set eat-treshold eat-treshold-s2
+    set eat-threshold eat-threshold-s2
 
     set shoot-vision shoot-vision-s2
-    set shoot-treshold shoot-treshold-s2
+    set shoot-threshold shoot-threshold-s2
     set shoot-accuracy shoot-accuracy-s2
     set shoot-chance shoot-chance-s2
   ]
@@ -277,8 +277,8 @@ SLIDER
 416
 184
 449
-eat-treshold-s1
-eat-treshold-s1
+eat-threshold-s1
+eat-threshold-s1
 0
 8
 0.0
@@ -292,11 +292,11 @@ SLIDER
 479
 184
 512
-shoot-treshold-s1
-shoot-treshold-s1
+shoot-threshold-s1
+shoot-threshold-s1
 0
 36
-40.0
+36.0
 1
 1
 NIL
@@ -307,8 +307,8 @@ SLIDER
 416
 360
 449
-eat-treshold-s2
-eat-treshold-s2
+eat-threshold-s2
+eat-threshold-s2
 0
 8
 2.0
@@ -322,11 +322,11 @@ SLIDER
 480
 360
 513
-shoot-treshold-s2
-shoot-treshold-s2
+shoot-threshold-s2
+shoot-threshold-s2
 0
 36
-40.0
+36.0
 1
 1
 NIL

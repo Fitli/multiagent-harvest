@@ -126,7 +126,7 @@ end
 to regrow
   ask patches with [is-tree and not has-fruit] [
     let fertility count neighbors with [has-fruit]
-    if (random-float 1) < 1 - ((1 - regrow-rate / 1000) ^ fertility)
+    if (random-float 1) < 1 - ((1 - spread-rate / 1000) ^ fertility)
     [ set has-fruit true ]
   ]
 end
@@ -178,8 +178,8 @@ SLIDER
 161
 360
 194
-regrow-rate
-regrow-rate
+spread-rate
+spread-rate
 0
 100
 10.0

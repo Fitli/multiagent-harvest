@@ -243,7 +243,7 @@ PLOT
 10
 1820
 185
-gains
+efficiency
 NIL
 NIL
 0.0

@@ -6,6 +6,7 @@ globals [
   equality
   sum-time-gains
   sum-tics-alive
+  sustainability
 ]
 
 patches-own [
@@ -160,9 +161,9 @@ ticks
 
 SLIDER
 15
-195
+105
 187
-228
+138
 density
 density
 0
@@ -175,9 +176,9 @@ HORIZONTAL
 
 SLIDER
 191
-195
+105
 363
-228
+138
 spread-rate
 spread-rate
 0
@@ -190,9 +191,9 @@ HORIZONTAL
 
 BUTTON
 121
-126
+36
 188
-159
+69
 NIL
 setup
 NIL
@@ -207,9 +208,9 @@ NIL
 
 BUTTON
 192
-126
+36
 255
-159
+69
 NIL
 go
 T
@@ -224,9 +225,9 @@ NIL
 
 SLIDER
 15
-275
+185
 187
-308
+218
 num-turtles-s1
 num-turtles-s1
 0
@@ -259,9 +260,9 @@ PENS
 
 SLIDER
 191
-275
+185
 363
-308
+218
 num-turtles-s2
 num-turtles-s2
 0
@@ -274,9 +275,9 @@ HORIZONTAL
 
 SLIDER
 15
-354
+264
 187
-387
+297
 eat-threshold-s1
 eat-threshold-s1
 0
@@ -289,9 +290,9 @@ HORIZONTAL
 
 SLIDER
 15
-417
+327
 187
-450
+360
 shoot-threshold-s1
 shoot-threshold-s1
 0
@@ -304,9 +305,9 @@ HORIZONTAL
 
 SLIDER
 191
-354
+264
 363
-387
+297
 eat-threshold-s2
 eat-threshold-s2
 0
@@ -319,9 +320,9 @@ HORIZONTAL
 
 SLIDER
 191
-418
+328
 363
-451
+361
 shoot-threshold-s2
 shoot-threshold-s2
 0
@@ -351,10 +352,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "if (ticks > 0) [plot sum-tics-alive / (ticks * num-turtles)]"
 
 PLOT
-1455
-550
-1819
-725
+15
+525
+365
+700
 turtles alive
 NIL
 NIL
@@ -390,9 +391,9 @@ PENS
 
 SLIDER
 15
-322
+232
 187
-355
+265
 eat-vision-s1
 eat-vision-s1
 0
@@ -405,9 +406,9 @@ HORIZONTAL
 
 SLIDER
 191
-322
+232
 363
-355
+265
 eat-vision-s2
 eat-vision-s2
 0
@@ -420,9 +421,9 @@ HORIZONTAL
 
 SLIDER
 15
-386
+296
 187
-419
+329
 shoot-vision-s1
 shoot-vision-s1
 0
@@ -435,9 +436,9 @@ HORIZONTAL
 
 SLIDER
 191
-386
+296
 363
-419
+329
 shoot-vision-s2
 shoot-vision-s2
 0
@@ -450,9 +451,9 @@ HORIZONTAL
 
 SLIDER
 15
-449
+359
 187
-482
+392
 shoot-accuracy-s1
 shoot-accuracy-s1
 0
@@ -465,9 +466,9 @@ HORIZONTAL
 
 SLIDER
 191
-450
+360
 363
-483
+393
 shoot-accuracy-s2
 shoot-accuracy-s2
 0
@@ -480,9 +481,9 @@ HORIZONTAL
 
 SLIDER
 15
-481
+391
 187
-514
+424
 shoot-chance-s1
 shoot-chance-s1
 0
@@ -495,9 +496,9 @@ HORIZONTAL
 
 SLIDER
 191
-482
+392
 363
-515
+425
 shoot-chance-s2
 shoot-chance-s2
 0
@@ -510,9 +511,9 @@ HORIZONTAL
 
 TEXTBOX
 17
-173
+83
 167
-193
+103
 Environment
 14
 0.0
@@ -520,9 +521,9 @@ Environment
 
 TEXTBOX
 17
-251
+161
 167
-271
+181
 Strategies
 14
 0.0
@@ -530,9 +531,9 @@ Strategies
 
 SWITCH
 15
-531
+441
 363
-564
+474
 always-update-turtle-constants
 always-update-turtle-constants
 0
@@ -541,14 +542,32 @@ always-update-turtle-constants
 
 SWITCH
 15
-567
+477
 363
-600
+510
 render?
 render?
 0
 1
 -1000
+
+PLOT
+1455
+550
+1820
+725
+sustainability
+NIL
+NIL
+0.0
+1000.0
+0.0
+1.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -16777216 true "" "plot sustainability"
 
 @#$#@#$#@
 ## WHAT IS IT?

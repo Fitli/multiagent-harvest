@@ -132,10 +132,10 @@ to regrow
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-378
-10
-1446
-679
+375
+30
+1443
+699
 -1
 -1
 20.0
@@ -159,10 +159,10 @@ ticks
 30.0
 
 SLIDER
-12
-161
-184
-194
+15
+195
+187
+228
 density
 density
 0
@@ -174,10 +174,10 @@ density
 HORIZONTAL
 
 SLIDER
-188
-161
-360
-194
+191
+195
+363
+228
 spread-rate
 spread-rate
 0
@@ -189,10 +189,10 @@ spread-rate
 HORIZONTAL
 
 BUTTON
-26
-29
-93
-62
+121
+126
+188
+159
 NIL
 setup
 NIL
@@ -206,10 +206,10 @@ NIL
 1
 
 BUTTON
-97
-29
-160
-62
+192
+126
+255
+159
 NIL
 go
 T
@@ -223,10 +223,10 @@ NIL
 1
 
 SLIDER
-12
-311
-184
-344
+15
+275
+187
+308
 num-turtles-s1
 num-turtles-s1
 0
@@ -238,17 +238,17 @@ NIL
 HORIZONTAL
 
 PLOT
-1462
-12
-1662
-162
+1455
+10
+1820
+185
 gains
 NIL
 NIL
 0.0
 1000.0
 0.0
-1.0
+0.2
 true
 false
 "" ""
@@ -258,10 +258,10 @@ PENS
 "pen-2" 1.0 0 -2674135 true "" "if ticks > 0 [plot s2-avg-gain]"
 
 SLIDER
-188
-311
-360
-344
+191
+275
+363
+308
 num-turtles-s2
 num-turtles-s2
 0
@@ -273,70 +273,70 @@ NIL
 HORIZONTAL
 
 SLIDER
-12
-416
-184
-449
+15
+354
+187
+387
 eat-threshold-s1
 eat-threshold-s1
 0
 8
-0.0
+4.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-12
-479
-184
-512
+15
+417
+187
+450
 shoot-threshold-s1
 shoot-threshold-s1
 0
 36
-36.0
+40.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-188
-416
-360
-449
+191
+354
+363
+387
 eat-threshold-s2
 eat-threshold-s2
 0
 8
-2.0
+4.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-188
-480
-360
-513
+191
+418
+363
+451
 shoot-threshold-s2
 shoot-threshold-s2
 0
 36
-36.0
+40.0
 1
 1
 NIL
 HORIZONTAL
 
 PLOT
-1462
-317
-1662
-467
+1455
+370
+1820
+545
 peace
 NIL
 NIL
@@ -351,10 +351,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "if (ticks > 0) [plot sum-tics-alive / (ticks * num-turtles)]"
 
 PLOT
-1461
-472
-1661
-622
+1455
+550
+1819
+725
 turtles alive
 NIL
 NIL
@@ -371,10 +371,10 @@ PENS
 "pen-2" 1.0 0 -2674135 true "" "plot count turtles with [strategy = 2 and not hidden?]"
 
 PLOT
-1462
-163
-1662
-313
+1455
+190
+1820
+365
 equality
 NIL
 NIL
@@ -389,10 +389,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot equality"
 
 SLIDER
-12
-384
-184
-417
+15
+322
+187
+355
 eat-vision-s1
 eat-vision-s1
 0
@@ -404,10 +404,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-188
-384
-360
-417
+191
+322
+363
+355
 eat-vision-s2
 eat-vision-s2
 0
@@ -419,10 +419,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-12
-448
-184
-481
+15
+386
+187
+419
 shoot-vision-s1
 shoot-vision-s1
 0
@@ -434,10 +434,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-188
-448
-360
-481
+191
+386
+363
+419
 shoot-vision-s2
 shoot-vision-s2
 0
@@ -449,10 +449,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-12
-511
-184
-544
+15
+449
+187
+482
 shoot-accuracy-s1
 shoot-accuracy-s1
 0
@@ -464,10 +464,10 @@ shoot-accuracy-s1
 HORIZONTAL
 
 SLIDER
-188
-512
-360
-545
+191
+450
+363
+483
 shoot-accuracy-s2
 shoot-accuracy-s2
 0
@@ -479,10 +479,10 @@ shoot-accuracy-s2
 HORIZONTAL
 
 SLIDER
-12
-543
-184
-576
+15
+481
+187
+514
 shoot-chance-s1
 shoot-chance-s1
 0
@@ -494,10 +494,10 @@ shoot-chance-s1
 HORIZONTAL
 
 SLIDER
-188
-544
-360
-577
+191
+482
+363
+515
 shoot-chance-s2
 shoot-chance-s2
 0
@@ -509,64 +509,46 @@ shoot-chance-s2
 HORIZONTAL
 
 TEXTBOX
-14
-139
-164
-159
+17
+173
+167
+193
 Environment
 14
 0.0
 1
 
 TEXTBOX
-14
-287
-164
-307
+17
+251
+167
+271
 Strategies
 14
 0.0
 1
 
 SWITCH
-12
-650
-360
-683
+15
+531
+363
+564
 always-update-turtle-constants
 always-update-turtle-constants
-1
+0
 1
 -1000
 
 SWITCH
-12
-686
-118
-719
+15
+567
+363
+600
 render?
 render?
 0
 1
 -1000
-
-PLOT
-1704
-210
-1904
-360
-sustain
-NIL
-NIL
-0.0
-10.0
-0.0
-10.0
-true
-false
-"" ""
-PENS
-"default" 1.0 0 -16777216 true "" "plot sum-time-gains / ((sum [gain] of turtles) + 1)"
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -1088,6 +1070,82 @@ setup</setup>
       <value value="0"/>
     </enumeratedValueSet>
   </experiment>
+  <experiment name="SSD-experiment" repetitions="5" runMetricsEveryStep="false">
+    <setup>set num-turtles-s2 2 - num-turtles-s1
+setup</setup>
+    <go>go</go>
+    <timeLimit steps="1000"/>
+    <metric>overall-avg-gain</metric>
+    <metric>s1-avg-gain</metric>
+    <metric>s2-avg-gain</metric>
+    <metric>equality</metric>
+    <metric>sum-tics-alive / (ticks * num-turtles)</metric>
+    <metric>sum-time-gains / (sum [gain] of turtles)</metric>
+    <enumeratedValueSet variable="render?">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="always-update-turtle-constants">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="density">
+      <value value="30"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="spread-rate">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="num-turtles-s1">
+      <value value="0"/>
+      <value value="1"/>
+      <value value="2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="num-turtles-s2">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-vision-s1">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-vision-s2">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-accuracy-s1">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-accuracy-s2">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-threshold-s1">
+      <value value="0"/>
+      <value value="1"/>
+      <value value="2"/>
+      <value value="4"/>
+      <value value="8"/>
+      <value value="12"/>
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-threshold-s2">
+      <value value="0"/>
+      <value value="1"/>
+      <value value="2"/>
+      <value value="4"/>
+      <value value="8"/>
+      <value value="12"/>
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-chance-s1">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-chance-s2">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="eat-vision-s1">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="eat-vision-s2">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <steppedValueSet variable="eat-threshold-s1" first="0" step="1" last="4"/>
+    <steppedValueSet variable="eat-threshold-s2" first="0" step="1" last="4"/>
+  </experiment>
 </experiments>
 @#$#@#$#@
 @#$#@#$#@
@@ -1102,5 +1160,5 @@ true
 Line -7500403 true 150 150 90 180
 Line -7500403 true 150 150 210 180
 @#$#@#$#@
-0
+1
 @#$#@#$#@

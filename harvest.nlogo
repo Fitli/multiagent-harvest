@@ -933,84 +933,6 @@ NetLogo 6.2.0
 @#$#@#$#@
 @#$#@#$#@
 <experiments>
-  <experiment name="ivancin-experiment" repetitions="5" runMetricsEveryStep="false">
-    <setup>set num-turtles-s2 12 - num-turtles-s1
-setup</setup>
-    <go>go</go>
-    <timeLimit steps="1000"/>
-    <metric>overall-avg-gain</metric>
-    <metric>s1-avg-gain</metric>
-    <metric>s2-avg-gain</metric>
-    <metric>equality</metric>
-    <metric>sum-tics-alive / (ticks * num-turtles)</metric>
-    <metric>sum-time-gains / (sum [gain] of turtles + 0.001)</metric>
-    <enumeratedValueSet variable="render?">
-      <value value="false"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="always-update-turtle-constants">
-      <value value="false"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="density">
-      <value value="30"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="regrow-rate">
-      <value value="10"/>
-    </enumeratedValueSet>
-    <steppedValueSet variable="num-turtles-s1" first="0" step="1" last="12"/>
-    <enumeratedValueSet variable="num-turtles-s2">
-      <value value="5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="shoot-vision-s1">
-      <value value="5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="shoot-vision-s2">
-      <value value="5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="shoot-accuracy-s1">
-      <value value="50"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="shoot-accuracy-s2">
-      <value value="50"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="shoot-treshold-s1">
-      <value value="0"/>
-      <value value="1"/>
-      <value value="2"/>
-      <value value="4"/>
-      <value value="8"/>
-      <value value="12"/>
-      <value value="40"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="shoot-treshold-s2">
-      <value value="0"/>
-      <value value="1"/>
-      <value value="2"/>
-      <value value="4"/>
-      <value value="8"/>
-      <value value="12"/>
-      <value value="40"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="shoot-chance-s1">
-      <value value="50"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="shoot-chance-s2">
-      <value value="50"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="eat-vision-s1">
-      <value value="5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="eat-vision-s2">
-      <value value="5"/>
-    </enumeratedValueSet>
-    <steppedValueSet variable="eat-treshold-s1" first="0" step="1" last="4"/>
-    <steppedValueSet variable="eat-treshold-s2" first="0" step="1" last="4"/>
-    <enumeratedValueSet variable="eat-timeout-s1">
-      <value value="0"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="eat-timeout-s2">
-      <value value="0"/>
-    </enumeratedValueSet>
-  </experiment>
   <experiment name="smaller-space" repetitions="10" sequentialRunOrder="false" runMetricsEveryStep="false">
     <setup>set num-turtles-s2 12 - num-turtles-s1
 setup</setup>
@@ -1164,6 +1086,134 @@ setup</setup>
     </enumeratedValueSet>
     <steppedValueSet variable="eat-threshold-s1" first="0" step="1" last="4"/>
     <steppedValueSet variable="eat-threshold-s2" first="0" step="1" last="4"/>
+  </experiment>
+  <experiment name="prison" repetitions="30" sequentialRunOrder="false" runMetricsEveryStep="false">
+    <setup>set num-turtles-s2 12 - num-turtles-s1
+setup</setup>
+    <go>go</go>
+    <timeLimit steps="1000"/>
+    <metric>overall-avg-gain</metric>
+    <metric>s1-avg-gain</metric>
+    <metric>s2-avg-gain</metric>
+    <metric>equality</metric>
+    <metric>sum-tics-alive / (ticks * num-turtles)</metric>
+    <metric>sum-time-gains / (sum [gain] of turtles + 0.001)</metric>
+    <enumeratedValueSet variable="render?">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="always-update-turtle-constants">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="density">
+      <value value="30"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="spread-rate">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <steppedValueSet variable="num-turtles-s1" first="0" step="1" last="12"/>
+    <enumeratedValueSet variable="num-turtles-s2">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-vision-s1">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-vision-s2">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-accuracy-s1">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-accuracy-s2">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-threshold-s1">
+      <value value="2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-threshold-s2">
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-chance-s1">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-chance-s2">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="eat-vision-s1">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="eat-vision-s2">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="eat-threshold-s1">
+      <value value="2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="eat-threshold-s2">
+      <value value="1"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="hunt" repetitions="30" sequentialRunOrder="false" runMetricsEveryStep="false">
+    <setup>set num-turtles-s2 12 - num-turtles-s1
+setup</setup>
+    <go>go</go>
+    <timeLimit steps="1000"/>
+    <metric>overall-avg-gain</metric>
+    <metric>s1-avg-gain</metric>
+    <metric>s2-avg-gain</metric>
+    <metric>equality</metric>
+    <metric>sum-tics-alive / (ticks * num-turtles)</metric>
+    <metric>sum-time-gains / (sum [gain] of turtles + 0.001)</metric>
+    <enumeratedValueSet variable="render?">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="always-update-turtle-constants">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="density">
+      <value value="30"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="spread-rate">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <steppedValueSet variable="num-turtles-s1" first="0" step="1" last="12"/>
+    <enumeratedValueSet variable="num-turtles-s2">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-vision-s1">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-vision-s2">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-accuracy-s1">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-accuracy-s2">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-threshold-s1">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-threshold-s2">
+      <value value="8"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-chance-s1">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="shoot-chance-s2">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="eat-vision-s1">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="eat-vision-s2">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="eat-threshold-s1">
+      <value value="3"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="eat-threshold-s2">
+      <value value="0"/>
+    </enumeratedValueSet>
   </experiment>
 </experiments>
 @#$#@#$#@
